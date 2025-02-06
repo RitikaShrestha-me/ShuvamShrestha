@@ -5,8 +5,8 @@ import { Poppins } from "next/font/google";
 const roboto = Poppins({ weight: "500", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Foods and Goods",
-	description: "Ecommerce Website which sells Nepalese goods in the UK",
+	title: "Shuvam Shrestha",
+	description: "Personal Portfolio",
 };
 
 export default function RootLayout({
