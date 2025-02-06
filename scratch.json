@@ -1,0 +1,36 @@
+{
+    "position": 0,
+    "user": {
+        "pk": "1425510731",
+        "pk_id": "1425510731",
+        "username": "szpradhan",
+        "full_name": "Shuvam Pradhan Crestha",
+        "is_private": false,
+        "fbid_v2": 17841401161952272,
+        "third_party_downloads_enabled": 1,
+        "strong_id__": "1425510731",
+        "id": "1425510731",
+        "profile_pic_id": "3452693301951744508_1425510731",
+        "profile_pic_url": "https://instagram.fktm17-1.fna.fbcdn.net/v/t51.2885-19/458729268_833507772146279_8327055067114343061_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fktm17-1.fna.fbcdn.net&_nc_cat=111&_nc_oc=Q6cZ2AGvVyGdsJWKGeCFaKMIKPTKtp2RhiVndXaqeBYvq-7aXcjgT7ih8C6nU0FyybLwjp4&_nc_ohc=I60tGmSgeYAQ7kNvgEKxxC9&_nc_gid=4cd4aebc4102460aa69a9d0396048a91&edm=AHG7ALcBAAAA&ccb=7-5&oh=00_AYBbcBbOYEy-lHoTYiZLyMIUqLGgAU-kCNJ7SkIQHt50wA&oe=677CB714&_nc_sid=c9086e",
+        "has_anonymous_profile_picture": false,
+        "account_badges": [],
+        "is_verified": false,
+        "has_opt_eligible_shop": false,
+        "social_context": "Followed by manju_itani2020 + 7 more",
+        "search_social_context": "Followed by manju_itani2020 + 7 more",
+        "search_social_context_snippet_type": "typeahead_mutual_followers",
+        "unseen_count": 0,
+        "friendship_status": {
+            "following": true,
+            "incoming_request": false,
+            "is_bestie": true,
+            "is_feed_favorite": false,
+            "is_private": false,
+            "is_restricted": false,
+            "outgoing_request": false
+        },
+        "latest_reel_media": 0,
+        "is_verified_search_boosted": false,
+        "should_show_category": false
+    }
+}
