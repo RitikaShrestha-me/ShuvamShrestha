@@ -1,3 +1,4 @@
+import useScreenSize from '@/hook/useScreenSize';
 import React from "react";
 
 const achievements = [
@@ -28,25 +29,27 @@ const achievements = [
 	},
 ];
 
-const getCertificateDom = (id: number, image: string, description: string, height: string, width: string) => (
-	<div key={id} className='relative flex justify-center'
-		style={{ height: height, width: width }}>
-		<div
-			style={{ backgroundImage: `url(${image})`, height: height, width: width }}
-			className="bg-contain bg-center"
-		/>
-		<div className="absolute flex w-full justify-center bottom-[-30px]">
-			<p className="text-base-100 h-12 w-[80%] rounded-md px-2 flex items-center justify-center bg-primary text-xs">{description}</p>
-		</div>
-	</div>
-)
-
 const Achievements = () => {
+	const { isMobileScreen } = useScreenSize();
+
+	const getCertificateDom = (id: number, image: string, description: string, height: string, width: string) => (
+		<div key={id} className='relative flex justify-center'
+			style={{ height: isMobileScreen ? '280px' : height, width: isMobileScreen ? '100%' : width }}>
+			<div
+				style={{ backgroundImage: `url(${image})`, height: isMobileScreen ? '280px' : height, width: isMobileScreen ? '100%' : width }}
+				className="bg-contain bg-no-repeat bg-center"
+			/>
+			<div className="absolute flex w-full justify-center bottom-[-30px]">
+				<p className="text-base-100 h-12 w-[80%] rounded-md px-2 flex items-center justify-center bg-primary text-xs">{description}</p>
+			</div>
+		</div>
+	)
+
 	return (
 		<div id='certificate' className="py-10 w-full">
 			<div className="max-w-6xl px-4 mx-auto text-center">
 				<h2 className="text-2xl font-bold mb-8">Achievements & Credentials</h2>
-				<div className="flex container gap-6">
+				<div className="flex flex-col lg:flex-row container gap-12 lg:gap-6">
 					<div className='flex flex-col flex-1 gap-12'>
 						{getCertificateDom(
 							achievements[0]?.id,

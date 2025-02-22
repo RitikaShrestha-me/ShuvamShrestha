@@ -7,7 +7,7 @@ export default function AcademicTimeline() {
 	];
 
 	return (
-		<div className="container mx-auto px-20 py-12">
+		<div className="container mx-auto px-6 lg:px-20 py-12">
 			<h2 className="text-center text-3xl font-semibold text-gray-800 mb-10">My Academic Foundation</h2>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 				{education.map((item, index) => (

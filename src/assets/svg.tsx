@@ -23,10 +23,18 @@ export const MailIcon = ({ height, width }: { height?: number, width?: number })
 	)
 }
 
-export const QuotesIcon = () => {
+export const QuotesIcon = ({ height, width }: { height?: number, width?: number }) => {
 	return (
-		<svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width={width || "32"} height={height || "33"} viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path d="M2 20C2 17 5 11 2 2M9.5 23.5C13.8333 19.3333 22.7 9.2 23.5 2M12.5 30.5C15.1667 30.5 22.3 29.1 29.5 23.5" stroke="#6C9A68" strokeWidth="4" stroke-linecap="round" stroke-linejoin="round" />
+		</svg>
+	)
+}
+
+export const HamburgerIcon = ({ height, width }: { height?: number, width?: number }) => {
+	return (
+		<svg width={width || "40"} height={height || "40"} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M28.38 0H11.62C4.34 0 0 4.34 0 11.62V28.36C0 35.66 4.34 40 11.62 40H28.36C35.64 40 39.98 35.66 39.98 28.38V11.62C40 4.34 35.66 0 28.38 0ZM30 30.5H10C9.18 30.5 8.5 29.82 8.5 29C8.5 28.18 9.18 27.5 10 27.5H30C30.82 27.5 31.5 28.18 31.5 29C31.5 29.82 30.82 30.5 30 30.5ZM30 21.5H10C9.18 21.5 8.5 20.82 8.5 20C8.5 19.18 9.18 18.5 10 18.5H30C30.82 18.5 31.5 19.18 31.5 20C31.5 20.82 30.82 21.5 30 21.5ZM30 12.5H10C9.18 12.5 8.5 11.82 8.5 11C8.5 10.18 9.18 9.5 10 9.5H30C30.82 9.5 31.5 10.18 31.5 11C31.5 11.82 30.82 12.5 30 12.5Z" fill="#6C9A68" />
 		</svg>
 	)
 }

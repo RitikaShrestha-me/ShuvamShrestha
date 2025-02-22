@@ -1,3 +1,4 @@
+import Footer from '@/sections/Footer/Footer'
 import Navbar from "@/sections/Navbar/Navbar"
 
 export default function UserLayout({
@@ -11,7 +12,7 @@ export default function UserLayout({
 				<Navbar />
 			</div>
 			{children}
-			{/* <Footer /> */}
+			<Footer />
 		</div >
 	)
 }

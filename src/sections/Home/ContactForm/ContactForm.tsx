@@ -11,14 +11,14 @@ const ContactForm = () => {
 		message: ''
 	});
 	return (
-		<div id='contact' className="w-full py-10">
+		<div id='contact' className="w-full py-10 mb-8">
 			<div className="max-w-6xl mx-auto px-4">
 				<h2 className="text-2xl font-bold text-center mb-14">
 					Let&apos;s Discuss Your Project
 				</h2>
-				<div className="flex bg-[#F2EBDB] h-[500px] rounded-xl shadow-lg">
+				<div className="flex shadow-lg flex-col lg:flex-row rounded-xl">
 					{/* Contact Information */}
-					<div className="bg-primary text-white px-[60px] py-[90px] rounded-l-xl">
+					<div className="bg-primary text-xs md:text-sm text-white px-[40px] lg:px-[60px] py-[60px] lg:py-[90px] rounded-t-xl lg:rounded-tr-none lg:rounded-l-xl">
 						<div className="space-y-6">
 							{/* Call Me */}
 							<div className="flex items-center bg-white text-primary rounded-lg p-4 gap-4 shadow-md">
@@ -47,9 +47,9 @@ const ContactForm = () => {
 						</div>
 					</div>
 					{/* Form Section */}
-					<div className="px-[60px] py-[80px] w-full">
-						<form className="space-y-6">
-							<div className="grid grid-cols-2 gap-4">
+					<div className="bg-[#F2EBDB] px-5 py-11 md:px-[60px] md:py-[80px] w-full rounded-b-xl lg:rounded-bl-none lg:rounded-r-xl">
+						<form className="space-y-4 lg:space-y-6">
+							<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 								<input
 									type="text"
 									placeholder="Full name"
@@ -63,7 +63,7 @@ const ContactForm = () => {
 									onChange={(evt) => setContact({ ...contact, email: evt.target.value?.toString() })}
 								/>
 							</div>
-							<div className="grid grid-cols-2 gap-4">
+							<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 								<input
 									type="text"
 									placeholder="Phone number"
@@ -94,16 +94,13 @@ const ContactForm = () => {
 								I’d love to discuss how we can collaborate. Please let me know a convenient time to connect. Looking forward to your response!%0D%0A%0D%0A
 								Best regards,%0D%0A
 								${contact.name}
-								`} className="bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-focus transition">
+								`} className="bg-primary h-[50px] flex items-center justify-center text-xs w-full md:w-fit text-white md:py-2 md:px-4 rounded-lg hover:bg-primary-focus transition">
 									Submit Message
 								</a>
 							</div>
 						</form>
 					</div>
 				</div>
-				<p className="text-center text-sm text-gray-500 mt-6">
-					© 2025. All Rights Reserved
-				</p>
 			</div>
 		</div>
 	);

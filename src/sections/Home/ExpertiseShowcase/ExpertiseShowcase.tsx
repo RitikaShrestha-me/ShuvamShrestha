@@ -12,8 +12,8 @@ const projects = [
 const ExpertiseShowcase = () => {
 	return (
 		<div id='portfolio' className="flex flex-col items-center py-10">
-			<h2 className="text-3xl font-semibold mb-8">Showcasing My Expertise</h2>
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 py-4 px-20">
+			<h2 className="text-3xl font-semibold mb-8 px-2 text-center">Showcasing My Expertise</h2>
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 py-4 px-4 lg:px-20">
 				{projects.map((project, index) => (
 					<div key={index} className="relative group">
 						<a href={project.link} target='_blank'>

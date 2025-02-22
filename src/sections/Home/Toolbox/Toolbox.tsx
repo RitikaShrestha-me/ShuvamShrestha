@@ -12,8 +12,8 @@ const tools = [
 
 const Toolbox = () => {
 	return (
-		<div className="flex w-full flex-col px-20 items-center py-10">
-			<h2 className="text-2xl font-semibold mb-8">My Toolbox for Project Success</h2>
+		<div className="flex w-full flex-col px-4 lg:px-20 items-center py-10">
+			<h2 className="text-2xl font-semibold text-center mb-8">My Toolbox for Project Success</h2>
 			<div className="grid w-full  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 				{tools.map((tool, index) => (
 					<div key={index} className="flex items-center gap-2 space-x-3 p-4 border rounded-lg shadow-sm hover:shadow-md transition">
