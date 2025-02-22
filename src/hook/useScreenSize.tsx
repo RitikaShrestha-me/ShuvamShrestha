@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 
 const useScreenSize = () => {
 	const [screenSize, setScreenSize] = useState({
-		width: window.innerWidth,
-		height: window.innerHeight,
-		isMobileScreen: window.innerWidth <= 560
+		width: 0,
+		height: 0,
+		isMobileScreen: false
 	});
 
 	useEffect(() => {
@@ -16,6 +16,7 @@ const useScreenSize = () => {
 			});
 		};
 
+		handleResize();
 		window.addEventListener('resize', handleResize);
 
 		// Clean up the event listener when the component unmounts
