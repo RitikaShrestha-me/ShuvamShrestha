@@ -11,7 +11,7 @@ export default function Hero() {
 
 	const renderMainImage = () => {
 		return (
-			<div className='relative w-full scale-75 flex justify-center h-[350px] md:scale-100 md:px-24'>
+			<div className='relative w-full scale-75 flex justify-center h-[350px] md:scale-110 md:px-24'>
 				<div className='h-80 w-72' style={{
 					left: isMobileScreen ? '40px' : undefined,
 					top: isMobileScreen ? '-40px' : undefined,
