@@ -39,15 +39,15 @@ export default function MyJourney() {
 			<div className='flex flex-col items-center my-12'>
 				<p className="text-4xl text-center text-[#333333] font-bold lg:w-156">My Professional Growth Story</p>
 			</div>
-			<div className="flex overflow-x-auto scrollbar-hide h-[460px] gap-4 mx-4 lg:mx-20">
+			<div className="flex overflow-x-auto scrollbar-hide h-[488px] gap-4 mx-4 lg:mx-20">
 				<div className='flex justify-center gap-5' style={{
-					height: '420px',
+					height: '447px',
 					borderBottom: '1px solid #D1D1D1'
 				}}>
 					{stats?.map((stat, index) =>
 						<div key={`stats-${index}`} className="h-96 text-center" style={{ width: '360px' }}>
-							<div className='h-48 bg-cover' style={{ backgroundImage: `url(${stat.image})` }}></div>
-							<div className='h-36 py-4 px-2 lg:px-8'>
+							<div className='h-52 bg-cover' style={{ backgroundImage: `url(${stat.image})` }}></div>
+							<div className='h-40 py-4 px-2 lg:px-8'>
 								<p className='text-md leading-5 mb-2 font-bold text-center h-[41px] overflow-auto'>{stat?.title}</p>
 								<p className='text-sm text-justify h-[100px] overflow-auto'>{stat?.description}</p>
 							</div>

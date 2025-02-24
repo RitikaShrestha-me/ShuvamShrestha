@@ -6,9 +6,11 @@ import NavLinks, { allCategory } from '@/sections/Navbar/NavLinks/NavLinks';
 import { HamburgerIcon } from '@/assets/svg';
 import useScreenSize from '@/hook/useScreenSize';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Navbar() {
 	const { isMobileScreen } = useScreenSize();
+	const [showMenu, setShowMenu] = useState(false);
 
 	return (
 		<div className="navbar z-20 w-screen justify-between bg-white text-neutral h-24">
@@ -27,20 +29,36 @@ export default function Navbar() {
 			</div>
 			{isMobileScreen ?
 				<div className="dropdown">
-					<label tabIndex={0} className="btn btn-ghost lg:hidden">
+					<button onClick={() => setShowMenu(!showMenu)} className="btn btn-ghost lg:hidden">
 						<HamburgerIcon />
-					</label>
-					<ul tabIndex={0} className="menu menu-sm dropdown-content bg-white absolute right-0 mt-3 z-20 p-2 shadow rounded-box w-52">
-						{allCategory?.map((category: any, i: number) => {
-							return <li><Link href={`/#${category?.toLowerCase()}`}>{category}</Link></li>
-						})}
-					</ul>
+					</button>
 				</div> :
 				<NavLinks />
 			}
 			{!isMobileScreen && <div className="pr-8">
 				<HireMeButton />
 			</div>}
+			{showMenu && (
+				<div className='absolute h-screen w-screen top-0 left-0 bg-white flex flex-col p-8 gap-8' onClick={() => setShowMenu(!showMenu)}>
+					<div
+						className="text-secondary"
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'space-evenly',
+							fontSize: '24px',
+						}}
+					>
+						<Image alt="logo" src='/images/logo.jpg' height={200} width={200} className="h-20 w-32" />
+					</div>
+					<ul tabIndex={0} className="bg-white text-lg w-full flex flex-col gap-3">
+						{allCategory?.map((category: any, i: number) => {
+							return <Link href={`/#${category?.toLowerCase()}`}><li className='hover:bg-slate-100 p-2 cursor-pointer'>{category}</li></Link>
+						})}
+					</ul>
+					<HireMeButton />
+				</div>
+			)}
 		</div>
 	);
 }

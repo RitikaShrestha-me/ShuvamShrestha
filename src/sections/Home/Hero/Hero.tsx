@@ -11,24 +11,13 @@ export default function Hero() {
 
 	const renderMainImage = () => {
 		return (
-			<div className='relative w-full scale-75 flex justify-center h-[350px] -ml-2 md:scale-100 md:-ml-8 md:px-24'>
-				<div className='border-primary border-2 absolute h-96 w-72 md:top-16 -ml-4 md:-ml-12 lg:ml-0 lg:left-16 -z-1'></div>
-				{isMobileScreen ? null : <div className='h-80 w-72 absolute md:relative' style={{
-					maxWidth: '100%',
-					paddingLeft: '0px',
-					left: isMobileScreen ? '78px' : undefined,
-					top: isMobileScreen ? '-72px' : undefined,
+			<div className='relative w-full scale-75 flex justify-center h-[350px] md:scale-100 md:px-24'>
+				<div className='h-80 w-72' style={{
+					left: isMobileScreen ? '40px' : undefined,
+					top: isMobileScreen ? '-40px' : undefined,
 					zIndex: 6
 				}}>
 					<Image src={'/images/Profile.png'} alt="Profile" width={1350} height={1000} />
-				</div>}
-				<div className='absolute lg:h-80 w-72' style={{
-					top: isMobileScreen ? '-30px' : '42.5px',
-					right: isMobileScreen ? '2.5px' : undefined
-				}}>
-					<Image src={'/images/bg.png'} alt="Profile" width={1000} height={800} style={{
-						maxWidth: '100%',
-					}} />
 				</div>
 				{isMobileScreen ? null :
 					<div className='flex gap-8 flex-col absolute items-center right-0 top-28 text-base text-primary'>
