@@ -1,0 +1,108 @@
+'use client';
+
+import { useState } from 'react';
+import { db } from '@/lib/firebaseConfig';
+import {
+	collection,
+	addDoc,
+	serverTimestamp
+} from 'firebase/firestore';
+
+export default function AddBlog() {
+	const [title, setTitle] = useState<string>('');
+	const [content, setContent] = useState<string>('');
+	const [type, setType] = useState<string>('');
+	const [imageUrl, setImageUrl] = useState<string>('');
+	const [isUploading, setIsUploading] = useState<boolean>(false);
+
+
+	const handleSubmit = async () => {
+		if (!title || !content || !imageUrl || !type) {
+			alert('Please fill in all title, type, content and image name.');
+			return;
+		}
+
+		setIsUploading(true);
+
+		try {
+			await addDoc(collection(db, 'blogs'), {
+				title,
+				type,
+				content,
+				imageUrl,
+				createdAt: serverTimestamp()
+			});
+
+			alert('Blog post submitted!');
+			setTitle('');
+			setContent('');
+			setType('');
+			setImageUrl('');
+		} catch (err) {
+			console.error('Error uploading blog:', err);
+			alert('Something went wrong.');
+		} finally {
+			setIsUploading(false);
+		}
+	};
+
+	return (
+		<div className="max-w-xl mx-auto bg-white rounded-2xl shadow-md p-8 mt-28 mb-8 space-y-6">
+			<h1 className="text-2xl font-bold text-gray-900">Add a Blog Post</h1>
+
+			<input
+				type="text"
+				placeholder="Title"
+				value={title}
+				onChange={(e) => setTitle(e.target.value)}
+				className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+			/>
+
+			<input
+				type="text"
+				placeholder="Type"
+				value={type}
+				onChange={(e) => setType(e.target.value)}
+				className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+			/>
+
+			<textarea
+				placeholder="Content"
+				value={content}
+				onChange={(e) => setContent(e.target.value)}
+				className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+				rows={6}
+			/>
+
+			<input
+				type="text"
+				placeholder="Image Url"
+				value={imageUrl}
+				onChange={(e) => setImageUrl(e.target.value)}
+				className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+			/>
+
+			{/*<div>
+				<label className="block mb-1 text-sm font-medium text-gray-700">Upload Cover Image</label>
+				 <input
+					type="file"
+					accept="image/*"
+					onChange={handleImageChange}
+					className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+        file:rounded-full file:border-0
+        file:text-sm file:font-semibold
+        file:bg-blue-50 file:text-blue-700
+        hover:file:bg-blue-100"
+				/> 
+			</div>*/}
+
+			<button
+				onClick={handleSubmit}
+				disabled={isUploading}
+				className="w-full py-3 mt-4 text-white bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition duration-200 disabled:opacity-50"
+			>
+				{isUploading ? 'Uploading...' : 'Submit Blog'}
+			</button>
+		</div>
+	);
+}
