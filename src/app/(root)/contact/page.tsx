@@ -1,3 +1,5 @@
+'use client';
+
 import { AddressIcon, CallIcon, MailIcon } from '@/assets/svg';
 import { EMAIL_ID } from '@/constants/consts';
 import React, { useState } from "react";
@@ -52,7 +54,7 @@ const ContactForm = () => {
 	};
 
 	return (
-		<div id='contact' className="w-full py-10 mb-8">
+		<div className="w-full py-10 mb-8 mt-20">
 			<div className="max-w-6xl mx-auto px-4">
 				<h2 className="text-2xl font-bold text-center mb-14">
 					Let&apos;s Discuss Your Project
@@ -63,7 +65,7 @@ const ContactForm = () => {
 						<div className="space-y-6">
 							{/* Call Me */}
 							<div className="flex items-center bg-white text-primary rounded-lg p-4 gap-4 shadow-md">
-								<div className='h-14 w-14 bg-primary rounded-xl flex justify-center items-center'><CallIcon /></div>
+								<div className='h-14 w-14 bg-primary rounded-xl text-white flex justify-center items-center'><CallIcon /></div>
 								<div>
 									<p className="text-gray-500">Call me</p>
 									<p className="text-neutral">{process.env.NEXT_PUBLIC_PHONE_NUMBER}</p>
@@ -71,7 +73,7 @@ const ContactForm = () => {
 							</div>
 							{/* Email Me */}
 							<div className="flex items-center bg-white text-primary rounded-lg p-4 gap-4 shadow-md">
-								<div className='h-14 w-14 bg-primary rounded-xl flex justify-center items-center'><MailIcon height={20} width={26} /></div>
+								<div className='h-14 w-14 bg-primary rounded-xl text-white flex justify-center items-center'><MailIcon height={20} width={26} /></div>
 								<div>
 									<p className="text-gray-500">Email me</p>
 									<p className="text-neutral">{EMAIL_ID}</p>

@@ -1,14 +1,14 @@
 import Link from "next/link";
 
-export const allCategory = ['About', 'Experience', 'Portfolio', 'Certificate', 'Contact', 'Blogs']
+export const allCategory = ['My Services', 'Projects', 'Contact', 'Blogs']
 
 export default function NavLinks() {
 
 	const createCategoryLink = (category: string) => {
-		if (['Blogs']?.includes(category)) {
+		if (['Blogs', 'Contact']?.includes(category)) {
 			return `${category.toLowerCase()}`
 		}
-		return `#${category.toLowerCase()}`
+		return `#${category.toLowerCase().split(' ').join('-')}`
 	}
 
 	const createCategoryValue = (category: string) => {

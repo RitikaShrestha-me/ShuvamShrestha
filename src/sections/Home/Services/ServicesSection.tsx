@@ -9,6 +9,19 @@ const ServicesSection = () => {
 
 	const services = [
 		{
+			id: 'free-guidance',
+			title: 'Free Guidance',
+			description: 'Complimentary consultation and support',
+			icon: LightbulbIcon,
+			color: 'bg-green-50 border-green-200',
+			iconColor: 'text-green-600',
+			features: [
+				'New product Idea generation',
+				'Mind Mapping',
+				'Career Consultation',
+				'Basics of Sales and Marketing'
+			]
+		}, {
 			id: 'business',
 			title: 'Creating a Business',
 			description: 'Comprehensive business development solutions',
@@ -37,20 +50,6 @@ const ServicesSection = () => {
 				'Use of AI for quick iteration',
 				'Helping to create a dynamic team'
 			]
-		},
-		{
-			id: 'free-guidance',
-			title: 'Free Guidance',
-			description: 'Complimentary consultation and support',
-			icon: LightbulbIcon,
-			color: 'bg-green-50 border-green-200',
-			iconColor: 'text-green-600',
-			features: [
-				'New product Idea generation',
-				'Mind Mapping',
-				'Career Consultation',
-				'Basics of Sales and Marketing'
-			]
 		}
 	];
 
@@ -60,7 +59,7 @@ const ServicesSection = () => {
 	};
 
 	return (
-		<section className="py-16 px-4 bg-background">
+		<section id='my-services' className="py-16 px-4 bg-background">
 			<div className="max-w-7xl mx-auto">
 				<div className="text-center mb-12">
 					<h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
