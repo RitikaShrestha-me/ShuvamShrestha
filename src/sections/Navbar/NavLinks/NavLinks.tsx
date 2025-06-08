@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const allCategory = ['My Services', 'Projects', 'Contact', 'Blogs']
+export const allCategory = ['My Services', 'Projects', 'Blogs', 'Contact']
 
 export default function NavLinks() {
 

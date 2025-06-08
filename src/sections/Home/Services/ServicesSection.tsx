@@ -66,7 +66,7 @@ const ServicesSection = () => {
 						Book My Service
 					</h2>
 					<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-						Transform your business ideas into reality with our comprehensive service offerings.
+						Transform your business ideas into reality with my comprehensive service offerings.
 						Choose the perfect solution for your needs.
 					</p>
 				</div>
