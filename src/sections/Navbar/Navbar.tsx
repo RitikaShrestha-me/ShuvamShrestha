@@ -15,7 +15,8 @@ export default function Navbar() {
 	return (
 		<div className="navbar z-20 w-screen justify-between bg-white text-neutral h-24">
 			<div className="px-2 lg:px-8">
-				<div
+				<Link
+					href={'/'}
 					className="text-secondary"
 					style={{
 						display: 'flex',
@@ -25,7 +26,7 @@ export default function Navbar() {
 					}}
 				>
 					<Image alt="logo" src='/images/logo.jpg' height={200} width={200} className="h-18 w-24" />
-				</div>
+				</Link>
 			</div>
 			{isMobileScreen ?
 				<div className="dropdown">

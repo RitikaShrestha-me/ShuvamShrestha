@@ -67,7 +67,7 @@ const ContactForm = () => {
 								<div className='h-14 w-14 bg-primary rounded-xl flex justify-center items-center'><CallIcon /></div>
 								<div>
 									<p className="text-gray-500">Call me</p>
-									<p className="text-neutral">+977-9860308208</p>
+									<p className="text-neutral">{process.env.NEXT_PUBLIC_PHONE_NUMBER}</p>
 								</div>
 							</div>
 							{/* Email Me */}

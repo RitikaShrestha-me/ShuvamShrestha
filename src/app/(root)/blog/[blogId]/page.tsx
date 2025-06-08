@@ -36,7 +36,7 @@ export default function BlogDetail() {
 			{blog.content &&
 				blog?.content?.split('\n')?.map(
 					(splittedContent) =>
-						<p className="text-lg leading-relaxed text-justify py-2">{splittedContent}</p>
+						<p className="text-lg leading-relaxed text-justify py-1">{splittedContent}</p>
 				)}
 		</div>
 	);

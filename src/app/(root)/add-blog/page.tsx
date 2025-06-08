@@ -62,12 +62,12 @@ export default function AddBlog() {
 						placeholder="Enter Passcode"
 						value={passcode}
 						onChange={(e) => setPasscode(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 					/>
 
 					<button
 						onClick={verifyPasscode}
-						className="w-full py-3 mt-4 text-white bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition duration-200 disabled:opacity-50"
+						className="w-full py-3 mt-4 text-white bg-primary hover:bg-primary rounded-lg font-semibold transition duration-200 disabled:opacity-50"
 					>
 						Submit Passcode
 					</button>
@@ -81,7 +81,7 @@ export default function AddBlog() {
 						placeholder="Title"
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 					/>
 
 					<input
@@ -89,14 +89,14 @@ export default function AddBlog() {
 						placeholder="Type"
 						value={type}
 						onChange={(e) => setType(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 					/>
 
 					<textarea
 						placeholder="Content"
 						value={content}
 						onChange={(e) => setContent(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary"
 						rows={6}
 					/>
 
@@ -105,7 +105,7 @@ export default function AddBlog() {
 						placeholder="Image Url"
 						value={imageUrl}
 						onChange={(e) => setImageUrl(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 					/>
 
 					{/*<div>
@@ -117,7 +117,7 @@ export default function AddBlog() {
 					className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
         file:rounded-full file:border-0
         file:text-sm file:font-semibold
-        file:bg-blue-50 file:text-blue-700
+        file:bg-primary file:text-primary
         hover:file:bg-blue-100"
 				/> 
 			</div>*/}
@@ -125,7 +125,7 @@ export default function AddBlog() {
 					<button
 						onClick={handleSubmit}
 						disabled={isUploading}
-						className="w-full py-3 mt-4 text-white bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition duration-200 disabled:opacity-50"
+						className="w-full py-3 mt-4 text-white bg-primary hover:bg-primary rounded-lg font-semibold transition duration-200 disabled:opacity-50"
 					>
 						{isUploading ? 'Uploading...' : 'Submit Blog'}
 					</button>

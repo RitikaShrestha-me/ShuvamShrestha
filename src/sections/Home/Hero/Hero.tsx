@@ -1,6 +1,6 @@
 'use client';
 import FilledButton from '@/components/Button/FilledButton';
-import { MailIcon, FacebookIcon, InstagramIcon, LinkedInIcon, QuotesIcon } from '@/assets/svg';
+import { MailIcon, FacebookIcon, InstagramIcon, LinkedInIcon, QuotesIcon, PhoneIcon } from '@/assets/svg';
 import Image from "next/image";
 import Link from "next/link";
 import { EMAIL_ID } from '@/constants/consts';
@@ -40,7 +40,7 @@ export default function Hero() {
 					<div className="flex items-start justify-center pt-20 lg:pt-24 bg-white px-4 gap-12 mt-12 flex-col lg:px-20 lg:h-screen lg:flex-row">
 						<div className='flex flex-col gap-4 lg:gap-7 lg:pt-8'>
 							<div className='flex flex-col gap-2 lg:gap-4'>
-								<p className="pb-4 text-sm lg:text-base"><span className="px-3 py-2 lg:px-6 lg:py-4 text-base-100 bg-secondary">Available for work</span></p>
+								<p className="pb-4 text-sm lg:text-base"><span className="px-3 py-2 lg:px-6 lg:py-4 text-base-100 bg-secondary">Available 24/7</span></p>
 								<p className="text-3xl relative lg:text-5xl w-fit font-medium" style={{ lineHeight: '1.25' }}>
 									<div className='absolute -right-3 -top-2 md:-right-6 md:-top-6'><QuotesIcon height={isMobileScreen ? 16 : 32} width={isMobileScreen ? 16 : 32} /></div>
 									I&apos;m <span className='text-primary'>SHUVAM SHRESTHA</span>
@@ -50,14 +50,22 @@ export default function Hero() {
 							<p className="text-sm lg:text-base">MBA Finance | Diploma in IT</p>
 							{isMobileScreen && renderMainImage()}
 							<p className="text-sm lg:text-sm text-justify">With 4 years of marketing experience, strong academic achievements, and a passion for project management, I thrive on creating value-driven business solutions through technology. As a proactive team player and self-starter, I excel in negotiation, problem-solving, and analytical thinking, always striving for excellence and continuous growth.</p>
-							<FilledButton
-								content={
-									<span className='flex gap-2 px-4 text-base-100 justify-center items-center'>
-										Let&apos;s Talk <MailIcon />
-									</span>
-								}
-								href={`mailto:${EMAIL_ID}`}
-							/>
+							<div className='flex gap-4'>
+								<FilledButton
+									content={
+										<span className='flex gap-2 px-4 text-base-100 justify-center items-center'>
+											Let&apos;s Talk <MailIcon />
+										</span>
+									}
+									href={`mailto:${EMAIL_ID}`}
+								/>
+								<a
+									href={`tel:${process.env.NEXT_PUBLIC_PHONE_NUMBER}`}
+									className="rounded-full flex items-center justify-center px-3 py-2 bg-white text-black border border-primary hover:bg-primary hover:text-white shadow transition"
+								>
+									<PhoneIcon />
+								</a>
+							</div>
 						</div>
 						{!isMobileScreen && renderMainImage()}
 					</div>

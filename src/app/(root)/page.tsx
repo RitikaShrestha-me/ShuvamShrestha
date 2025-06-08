@@ -7,6 +7,7 @@ import Toolbox from '@/sections/Home/Toolbox/Toolbox';
 import ExpertiseShowcase from '@/sections/Home/ExpertiseShowcase/ExpertiseShowcase';
 import Achievements from '@/sections/Home/Achievements/Achievements';
 import ContactForm from '@/sections/Home/ContactForm/ContactForm';
+import ServicesSection from '@/sections/Home/Services/ServicesSection';
 
 const Home = () => {
 	return (
@@ -15,6 +16,7 @@ const Home = () => {
 			<MyJourney />
 			{/* <AcademicTimeline /> */}
 			<Toolbox />
+			<ServicesSection />
 			<ExpertiseShowcase />
 			<Achievements />
 			<ContactForm />
