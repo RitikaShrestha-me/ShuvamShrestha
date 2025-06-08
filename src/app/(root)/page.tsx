@@ -13,7 +13,7 @@ const Home = () => {
 		<div className="flex min-h-screen flex-col items-center justify-between bg-base-100">
 			<Hero />
 			<MyJourney />
-			<AcademicTimeline />
+			{/* <AcademicTimeline /> */}
 			<Toolbox />
 			<ExpertiseShowcase />
 			<Achievements />

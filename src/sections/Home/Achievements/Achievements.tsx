@@ -49,7 +49,7 @@ const Achievements = () => {
 		<div id='certificate' className="py-10 w-full">
 			<div className="max-w-6xl px-4 mx-auto text-center">
 				<h2 className="text-2xl font-bold mb-8">Achievements & Credentials</h2>
-				<div className="flex flex-col lg:flex-row container gap-12 lg:gap-6">
+				<div className="flex md:items-center flex-col lg:flex-row container gap-12 lg:gap-6">
 					<div className='flex flex-col flex-1 gap-12'>
 						{getCertificateDom(
 							achievements[0]?.id,

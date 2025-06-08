@@ -1,15 +1,57 @@
 import { AddressIcon, CallIcon, MailIcon } from '@/assets/svg';
 import { EMAIL_ID } from '@/constants/consts';
 import React, { useState } from "react";
+import { db } from '@/lib/firebaseConfig';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
+
+const initialState = {
+	name: '',
+	email: '',
+	phone: '',
+	budget: '',
+	message: ''
+};
 
 const ContactForm = () => {
-	const [contact, setContact] = useState({
-		name: '',
-		email: '',
-		phone: '',
-		budget: '',
-		message: ''
-	});
+	const [contact, setContact] = useState(initialState);
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
+	const handleSubmit = async () => {
+		const { name, email, phone, budget, message } = contact;
+
+		if (!name || !email || !phone || !budget || !message) {
+			alert('Please fill in all the fields.');
+			return;
+		}
+
+		setIsSubmitting(true);
+
+		try {
+			await addDoc(collection(db, 'contact'), {
+				id: uuidv4(),
+				...contact,
+				createdAt: serverTimestamp()
+			});
+			console.log('Before reset:', contact);
+			setContact({
+				name: '',
+				email: '',
+				phone: '',
+				budget: '',
+				message: ''
+			});
+			console.log('After reset:', contact);
+
+			alert('Contact submitted!');
+		} catch (err) {
+			console.error('Error submitting contact:', err);
+			alert('Something went wrong.');
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
+
 	return (
 		<div id='contact' className="w-full py-10 mb-8">
 			<div className="max-w-6xl mx-auto px-4">
@@ -52,12 +94,14 @@ const ContactForm = () => {
 							<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 								<input
 									type="text"
+									value={contact.name}
 									placeholder="Full name"
 									className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 									onChange={(evt) => setContact({ ...contact, name: evt.target.value?.toString() })}
 								/>
 								<input
 									type="email"
+									value={contact.email}
 									placeholder="Your email"
 									className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 									onChange={(evt) => setContact({ ...contact, email: evt.target.value?.toString() })}
@@ -66,12 +110,14 @@ const ContactForm = () => {
 							<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 								<input
 									type="text"
+									value={contact.phone}
 									placeholder="Phone number"
 									className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 									onChange={(evt) => setContact({ ...contact, phone: evt.target.value?.toString() })}
 								/>
 								<input
 									type="text"
+									value={contact.budget}
 									placeholder="Budget"
 									className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 									onChange={(evt) => setContact({ ...contact, budget: evt.target.value?.toString() })}
@@ -80,23 +126,17 @@ const ContactForm = () => {
 							<textarea
 								rows={4}
 								placeholder="Message"
+								value={contact.message}
 								className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
 								onChange={(evt) => setContact({ ...contact, message: evt.target.value?.toString() })}
 							></textarea>
 							<div className="flex justify-end">
-								<a href={`mailto:${EMAIL_ID}?subject=Excited to Collaborate!&body=
-								Dear Shuvam,%0D%0A%0D%0AI hope you're doing well. My name is ${contact.name}, and I’m reaching out because I’m interested in working with you.%0D%0A%0D%0A
-								Here are my details:%0D%0A
-								Email: ${contact.email}%0D%0A
-								Phone:  ${contact.phone}%0D%0A
-								Budget:  ${contact.budget}%0D%0A
-								Message:  ${contact.message}%0D%0A%0D%0A
-								I’d love to discuss how we can collaborate. Please let me know a convenient time to connect. Looking forward to your response!%0D%0A%0D%0A
-								Best regards,%0D%0A
-								${contact.name}
-								`} className="bg-primary h-[50px] flex items-center justify-center text-xs w-full md:w-fit text-white md:py-2 md:px-4 rounded-lg hover:bg-primary-focus transition">
-									Submit Message
-								</a>
+								<button
+									onClick={handleSubmit}
+									disabled={isSubmitting}
+									className="bg-primary h-[50px] flex items-center justify-center text-xs w-full md:w-fit text-white md:py-2 md:px-4 rounded-lg hover:bg-primary-focus transition">
+									{isSubmitting ? 'Submitting...' : 'Submit'} Message
+								</button>
 							</div>
 						</form>
 					</div>
