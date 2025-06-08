@@ -33,7 +33,7 @@ const ContactForm = () => {
 				...contact,
 				createdAt: serverTimestamp()
 			});
-			console.log('Before reset:', contact);
+
 			setContact({
 				name: '',
 				email: '',
@@ -41,7 +41,6 @@ const ContactForm = () => {
 				budget: '',
 				message: ''
 			});
-			console.log('After reset:', contact);
 
 			alert('Contact submitted!');
 		} catch (err) {

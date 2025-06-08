@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { CalendarIcon, UserIcon, MailIcon, CallIcon, MessageSquare } from '@/assets/svg';
 import { formatDateToInputValue, formatFullDate } from '@/util/dateFormat';
+import { db } from '@/lib/firebaseConfig';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 
 interface BookingModalProps {
 	isOpen: boolean;
@@ -11,20 +14,44 @@ interface BookingModalProps {
 export default function BookingModal({ isOpen, onClose, selectedService }: BookingModalProps) {
 	const [date, setDate] = useState<Date | undefined>(undefined);
 	const [time, setTime] = useState('');
-	const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '' });
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [form, setForm] = useState({
+		name: '',
+		email: '',
+		phone: '',
+		company: '',
+		message: ''
+	});
 	const slots = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM'];
 
 	const onChange = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
 
-	const onSubmit = (e: React.FormEvent) => {
+	const onSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!date || !time || !form.name || !form.email) {
 			return alert("Please fill all required fields");
 		}
-		alert("Booking Submitted! We'll reach out soon.");
-		setForm({ name: '', email: '', phone: '', company: '', message: '' });
-		setDate(undefined);
-		setTime('');
+		setIsSubmitting(true);
+
+		try {
+			await addDoc(collection(db, 'consultation'), {
+				id: uuidv4(),
+				...form,
+				selectedService: selectedService,
+				createdAt: serverTimestamp()
+			});
+
+			setForm({ name: '', email: '', phone: '', company: '', message: '' });
+			setDate(undefined);
+			setTime('');
+
+			alert("Booking Submitted! We'll reach out soon.");
+		} catch (err) {
+			console.error('Error submitting contact:', err);
+			alert('Something went wrong.');
+		} finally {
+			setIsSubmitting(false);
+		}
 		onClose();
 	};
 
@@ -96,6 +123,18 @@ export default function BookingModal({ isOpen, onClose, selectedService }: Booki
 									className="w-full border p-2 rounded mt-1"
 								/>
 							</div>
+							{/* Message */}
+							<div className="relative">
+								<label className="block text-sm font-medium">Message</label>
+								<MessageSquare className="absolute left-3 top-[36px] w-4 h-4 text-gray-400" />
+								<textarea
+									value={form.message}
+									onChange={e => onChange('message', e.target.value)}
+									placeholder="How may I help you?"
+									rows={4}
+									className="w-full border p-2 pl-10 rounded mt-1"
+								/>
+							</div>
 						</div>
 
 						{/* Date & Time */}
@@ -146,18 +185,6 @@ export default function BookingModal({ isOpen, onClose, selectedService }: Booki
 									</small>
 								</div>
 							)}
-							{/* Message */}
-							<div className="relative">
-								<label className="block text-sm font-medium">Message</label>
-								<MessageSquare className="absolute left-3 top-[36px] w-4 h-4 text-gray-400" />
-								<textarea
-									value={form.message}
-									onChange={e => onChange('message', e.target.value)}
-									placeholder="How may I help you?"
-									rows={4}
-									className="w-full border p-2 pl-10 rounded mt-1"
-								/>
-							</div>
 						</div>
 					</div>
 
@@ -166,8 +193,11 @@ export default function BookingModal({ isOpen, onClose, selectedService }: Booki
 						<button type="button" onClick={onClose} className="px-4 py-2 border rounded hover:bg-gray-100">
 							Cancel
 						</button>
-						<button type="submit" className="px-4 py-2 bg-primary text-white rounded hover:bg-primary">
-							Book Consultation
+						<button
+							type="submit"
+							disabled={isSubmitting}
+							className="px-4 py-2 bg-primary text-white rounded hover:bg-primary">
+							{isSubmitting ? 'Your Booking is Processing...' : 'Book Consultation'}
 						</button>
 					</div>
 				</form>

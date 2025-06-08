@@ -54,8 +54,8 @@ const ServicesSection = () => {
 		}
 	];
 
-	const handleBookService = (serviceId: string, serviceTitle: string) => {
-		setSelectedService(`${serviceTitle} - ${serviceId}`);
+	const handleBookService = (serviceTitle: string) => {
+		setSelectedService(`${serviceTitle}`);
 		setIsBookingOpen(true);
 	};
 
@@ -99,7 +99,7 @@ const ServicesSection = () => {
 									</div>
 
 									<button
-										onClick={() => handleBookService(service.id, service.title)}
+										onClick={() => handleBookService(service.title)}
 										className="w-full py-3 mt-4 text-white flex justify-center items-center bg-primary hover:bg-primary rounded-lg font-semibold transition duration-200 disabled:opacity-50"
 									>
 										Book Now
