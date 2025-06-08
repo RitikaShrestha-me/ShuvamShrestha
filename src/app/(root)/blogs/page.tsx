@@ -62,29 +62,29 @@ export default function ViewBlogs() {
 							/>
 						)}
 						<div className='p-4 flex flex-col justify-center'>
-							<p className='text-sm text-teal-500 py-4'>{blogs?.[0].type}</p>
-							<h2 className="text-4xl font-semibold text-gray-800 mb-2">{blogs?.[0].title}</h2>
-							<p className="text-base text-gray-500 mb-4 line-clamp-3">{blogs?.[0].content}</p>
+							<p className='text-sm text-teal-500 py-2'>{blogs?.[0].type}</p>
+							<h2 className="text-4xl font-semibold text-gray-800 py-2 leading-10">{blogs?.[0].title}</h2>
+							{/* <p className="text-base text-gray-500 mb-4 line-clamp-3">{blogs?.[0].content}</p> */}
 
 							{blogs?.[0].createdAt && (
-								<p className="text-sm text-gray-500 mb-2">
+								<p className="text-sm text-gray-500 pt-4">
 									Posted on {blogs?.[0].createdAt.toDate().toLocaleString()}
 								</p>
 							)}
 						</div>
 					</div>
 					<div className="grid grid-cols-3 p-4 lg:p-12 gap-12">
-						{blogs.map((blog, index) => (
+						{blogs?.map((blog, index) => (
 							index !== 0 &&
 							<div
-								key={blog.id}
+								key={blog?.id}
 								className="bg-white cursor-pointer rounded-2xl hover:shadow-lg transition-shadow duration-200"
 								onClick={() => handleRedirect(index)}
 							>
-								{blog.imageUrl && (
+								{blog?.imageUrl && (
 									<img
-										src={`/blog-images/${blog.imageUrl}`}
-										alt={blog.title}
+										src={`/blog-images/${blog?.imageUrl}`}
+										alt={blog?.title}
 										className="w-full h-56 object-cover rounded-lg border mt-2"
 									/>
 								)}
@@ -95,7 +95,7 @@ export default function ViewBlogs() {
 
 									{blog.createdAt && (
 										<p className="text-sm text-gray-500 mb-2">
-											Posted on {blog.createdAt.toDate().toLocaleString()}
+											Posted on {blog?.createdAt?.toDate()?.toLocaleString()}
 										</p>
 									)}
 								</div>
