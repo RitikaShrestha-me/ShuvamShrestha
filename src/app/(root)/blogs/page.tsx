@@ -51,7 +51,7 @@ export default function ViewBlogs() {
 				<p className="text-gray-500">No blog posts yet.</p>
 			) : (
 				<div>
-					<div className='grid grid-cols-2 px-16 gap-x-4 cursor-pointer'
+					<div className='grid grid-cols-1 md:grid-cols-2 px-0 mb-12 md:mb-0 md:px-8 lg:px-16 gap-x-4 cursor-pointer'
 						onClick={() => handleRedirect(0)}
 					>
 						{blogs?.[0].imageUrl && (
@@ -61,19 +61,19 @@ export default function ViewBlogs() {
 								className="w-full h-80 object-cover rounded-lg border mt-2"
 							/>
 						)}
-						<div className='p-4 flex flex-col justify-center'>
+						<div className='px-0 py-4 md:p-4 flex flex-col justify-center'>
 							<p className='text-sm text-teal-500 py-2'>{blogs?.[0].type}</p>
-							<h2 className="text-4xl font-semibold text-gray-800 py-2 leading-10">{blogs?.[0].title}</h2>
-							{/* <p className="text-base text-gray-500 mb-4 line-clamp-3">{blogs?.[0].content}</p> */}
+							<h2 className="text-lg lg:text-4xl font-semibold text-gray-800 py-2 lg:leading-10">{blogs?.[0].title}</h2>
+							<p className="text-base text-gray-500 mb-4 line-clamp-3 md:hidden">{blogs?.[0].content}</p>
 
 							{blogs?.[0].createdAt && (
-								<p className="text-sm text-gray-500 pt-4">
+								<p className="text-sm text-gray-500 md:pt-4">
 									Posted on {blogs?.[0].createdAt.toDate().toLocaleString()}
 								</p>
 							)}
 						</div>
 					</div>
-					<div className="grid grid-cols-3 p-4 lg:p-12 gap-12">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:p-8 lg:p-16 gap-8">
 						{blogs?.map((blog, index) => (
 							index !== 0 &&
 							<div
@@ -88,9 +88,9 @@ export default function ViewBlogs() {
 										className="w-full h-56 object-cover rounded-lg border mt-2"
 									/>
 								)}
-								<div className='p-4'>
+								<div className='py-4 md:p-4'>
 									<p className='text-sm text-teal-500 py-2'>{blog.type}</p>
-									<h2 className="text-xl font-semibold text-gray-800 mb-2">{blog.title}</h2>
+									<h2 className="text-xl font-semibold text-gray-800 py-2">{blog.title}</h2>
 									<p className="text-base text-gray-500 mb-4 line-clamp-3">{blog.content}</p>
 
 									{blog.createdAt && (
