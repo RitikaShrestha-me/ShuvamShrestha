@@ -12,6 +12,17 @@ export default function Navbar() {
 	const { isMobileScreen } = useScreenSize();
 	const [showMenu, setShowMenu] = useState(false);
 
+	const createCategoryLink = (category: string) => {
+		if (['Blogs', 'Contact']?.includes(category)) {
+			return `${category.toLowerCase()}`
+		}
+		return `#${category.toLowerCase().split(' ').join('-')}`
+	}
+
+	const createCategoryValue = (category: string) => {
+		return category.split('-').join(' ')
+	}
+
 	return (
 		<div className="navbar z-20 w-screen justify-between bg-white text-neutral h-24">
 			<div className="px-2 lg:px-8">
@@ -54,7 +65,7 @@ export default function Navbar() {
 					</div>
 					<ul tabIndex={0} className="bg-white text-lg w-full flex flex-col gap-3">
 						{allCategory?.map((category: any, i: number) => {
-							return <Link href={`/#${category?.toLowerCase()}`}><li className='hover:bg-slate-100 p-2 cursor-pointer'>{category}</li></Link>
+							return <Link href={`/${createCategoryLink(category)}`}><li className='hover:bg-slate-100 p-2 cursor-pointer'>{createCategoryValue(category)}</li></Link>
 						})}
 					</ul>
 					<HireMeButton />
