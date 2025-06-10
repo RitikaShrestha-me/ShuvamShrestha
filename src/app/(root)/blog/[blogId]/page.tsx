@@ -29,7 +29,7 @@ export default function BlogDetail() {
 			</p>
 			<h1 className="text-4xl text-center font-bold mb-4">{blog.title}</h1>
 			{blog.imageUrl && (<img
-				src={`/blog-images/${blog.imageUrl}`}
+				src={`${blog.imageUrl}`}
 				alt={blog.title}
 				className="w-full h-80 object-cover rounded-lg border mt-2 mb-6"
 			/>)}

@@ -56,7 +56,7 @@ export default function ViewBlogs() {
 					>
 						{blogs?.[0].imageUrl && (
 							<img
-								src={`/blog-images/${blogs?.[0].imageUrl}`}
+								src={`${blogs?.[0].imageUrl}`}
 								alt={blogs?.[0].title}
 								className="w-full h-80 object-cover rounded-lg border mt-2"
 							/>
@@ -83,7 +83,7 @@ export default function ViewBlogs() {
 							>
 								{blog?.imageUrl && (
 									<img
-										src={`/blog-images/${blog?.imageUrl}`}
+										src={`${blog?.imageUrl}`}
 										alt={blog?.title}
 										className="w-full h-56 object-cover rounded-lg border mt-2"
 									/>
