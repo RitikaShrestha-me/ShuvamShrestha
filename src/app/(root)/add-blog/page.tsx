@@ -16,13 +16,14 @@ export default function AddBlog() {
 	const [imageFile, setImageFile] = useState<File | null>(null)
 	const [isUploading, setIsUploading] = useState<boolean>(false);
 	const [isVerified, setIsVerified] = useState(false);
-	const [passcode, setPasscode] = useState('');
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [isSignUp, setIsSignUp] = useState(false)
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
 		if (file) setImageFile(file)
 	}
-
 
 	const handleSubmit = async () => {
 		if (!title || !content || !imageFile || !type) {
@@ -74,30 +75,39 @@ export default function AddBlog() {
 		}
 	};
 
-	const verifyPasscode = () => {
-		if (passcode === process.env.NEXT_PUBLIC_PASSCODE) {
+	const authenticateUser = async () => {
+		if (isSignUp) {
+			const { error } = await supabase.auth.signUp({ email, password })
+			if (error) alert(error.message)
+			else alert("Check your email for confirmation link!")
+		} else {
+			const { error } = await supabase.auth.signInWithPassword({ email, password })
+			if (error) alert(error.message)
+			else alert("Login successful!")
 			setIsVerified(true)
 		}
+	}
+
+	const logoutUser = async () => {
+		const { data: { session } } = await supabase.auth.getSession()
+		await supabase.auth.signOut()
+		setIsVerified(false)
 	}
 
 	return (
 		<>
 			{!isVerified ?
 				<div className="max-w-xl mx-auto bg-white rounded-2xl shadow-md p-8 mt-32 mb-8 space-y-6">
-					<input
-						type="text"
-						placeholder="Enter Passcode"
-						value={passcode}
-						onChange={(e) => setPasscode(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-					/>
-
-					<button
-						onClick={verifyPasscode}
-						className="w-full py-3 mt-4 text-white bg-primary hover:bg-primary rounded-lg font-semibold transition duration-200 disabled:opacity-50"
-					>
-						Submit Passcode
-					</button>
+					<input type="email" placeholder="Email" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+						onChange={(e) => setEmail(e.target.value)} />
+					<input type="password" placeholder="Password" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+						onChange={(e) => setPassword(e.target.value)} />
+					<button className="w-full py-3 mt-4 text-white bg-primary hover:bg-primary rounded-lg font-semibold transition duration-200 disabled:opacity-50"
+						onClick={authenticateUser}
+					>{isSignUp ? 'Sign Up' : 'Log In'}</button>
+					<p onClick={() => setIsSignUp(!isSignUp)}>
+						{isSignUp ? 'Already have an account? Log in' : "Don't have an account? Sign up"}
+					</p>
 				</div>
 				:
 				<div className="max-w-xl mx-auto bg-white rounded-2xl shadow-md p-8 mt-28 mb-8 space-y-6">
@@ -144,6 +154,9 @@ export default function AddBlog() {
 					>
 						{isUploading ? 'Uploading...' : 'Submit Blog'}
 					</button>
+					<button className="w-full py-3 mt-4 text-white bg-primary hover:bg-primary rounded-lg font-semibold transition duration-200 disabled:opacity-50"
+						onClick={logoutUser}
+					>{'Logout'}</button>
 				</div>
 			}
 		</>
