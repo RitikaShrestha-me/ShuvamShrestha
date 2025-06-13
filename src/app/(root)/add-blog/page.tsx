@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { db } from '@/lib/firebaseConfig';
+import { supabase } from '@/lib/supabaseClient'
 import {
 	collection,
 	addDoc,
@@ -12,13 +13,19 @@ export default function AddBlog() {
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [type, setType] = useState<string>('');
-	const [imageUrl, setImageUrl] = useState<string>('');
+	const [imageFile, setImageFile] = useState<File | null>(null)
 	const [isUploading, setIsUploading] = useState<boolean>(false);
 	const [isVerified, setIsVerified] = useState(false);
 	const [passcode, setPasscode] = useState('');
 
+	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0]
+		if (file) setImageFile(file)
+	}
+
+
 	const handleSubmit = async () => {
-		if (!title || !content || !imageUrl || !type) {
+		if (!title || !content || !imageFile || !type) {
 			alert('Please fill in all title, type, content and image name.');
 			return;
 		}
@@ -26,6 +33,26 @@ export default function AddBlog() {
 		setIsUploading(true);
 
 		try {
+			let imageUrl = ''
+
+			if (imageFile) {
+				const fileName = `${Date.now()}-${imageFile.name}`
+				const { error: uploadError } = await supabase.storage
+					.from('photos')
+					.upload(fileName, imageFile)
+
+				if (uploadError) {
+					console.error('Upload error:', uploadError)
+					return
+				}
+
+				const { data } = supabase.storage
+					.from('photos')
+					.getPublicUrl(fileName)
+
+				imageUrl = data.publicUrl
+			}
+
 			await addDoc(collection(db, 'blogs'), {
 				title,
 				type,
@@ -38,7 +65,7 @@ export default function AddBlog() {
 			setTitle('');
 			setContent('');
 			setType('');
-			setImageUrl('');
+			setImageFile(null)
 		} catch (err) {
 			console.error('Error uploading blog:', err);
 			alert('Something went wrong.');
@@ -100,27 +127,15 @@ export default function AddBlog() {
 						rows={6}
 					/>
 
-					<input
-						type="text"
-						placeholder="Image Url"
-						value={imageUrl}
-						onChange={(e) => setImageUrl(e.target.value)}
-						className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-					/>
-
-					{/*<div>
-				<label className="block mb-1 text-sm font-medium text-gray-700">Upload Cover Image</label>
-				 <input
-					type="file"
-					accept="image/*"
-					onChange={handleImageChange}
-					className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
-        file:rounded-full file:border-0
-        file:text-sm file:font-semibold
-        file:bg-primary file:text-primary
-        hover:file:bg-blue-100"
-				/> 
-			</div>*/}
+					<div>
+						<label className="block mb-1 text-sm font-medium text-gray-700">Upload Blog Image</label>
+						<input
+							type="file"
+							accept="image/*"
+							onChange={handleImageChange}
+							className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white"
+						/>
+					</div>
 
 					<button
 						onClick={handleSubmit}
