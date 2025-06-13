@@ -16,9 +16,8 @@ export default function AddBlog() {
 	const [imageFile, setImageFile] = useState<File | null>(null)
 	const [isUploading, setIsUploading] = useState<boolean>(false);
 	const [isVerified, setIsVerified] = useState(false);
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [isSignUp, setIsSignUp] = useState(false)
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0]
@@ -76,16 +75,16 @@ export default function AddBlog() {
 	};
 
 	const authenticateUser = async () => {
-		if (isSignUp) {
-			const { error } = await supabase.auth.signUp({ email, password })
-			if (error) alert(error.message)
-			else alert("Check your email for confirmation link!")
-		} else {
-			const { error } = await supabase.auth.signInWithPassword({ email, password })
-			if (error) alert(error.message)
-			else alert("Login successful!")
-			setIsVerified(true)
-		}
+		// if (isSignUp) {
+		// 	const { error } = await supabase.auth.signUp({ email, password })
+		// 	if (error) alert(error.message)
+		// 	else alert("Check your email for confirmation link!")
+		// } else {
+		const { error } = await supabase.auth.signInWithPassword({ email, password })
+		if (error) alert(error.message)
+		else alert("Login successful!")
+		setIsVerified(true)
+		// }
 	}
 
 	const logoutUser = async () => {
@@ -104,10 +103,7 @@ export default function AddBlog() {
 						onChange={(e) => setPassword(e.target.value)} />
 					<button className="w-full py-3 mt-4 text-white bg-primary hover:bg-primary rounded-lg font-semibold transition duration-200 disabled:opacity-50"
 						onClick={authenticateUser}
-					>{isSignUp ? 'Sign Up' : 'Log In'}</button>
-					<p onClick={() => setIsSignUp(!isSignUp)}>
-						{isSignUp ? 'Already have an account? Log in' : "Don't have an account? Sign up"}
-					</p>
+					>{'Log In'}</button>
 				</div>
 				:
 				<div className="max-w-xl mx-auto bg-white rounded-2xl shadow-md p-8 mt-28 mb-8 space-y-6">
